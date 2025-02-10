@@ -1,8 +1,10 @@
 #!/bin/bash
 
-# Load konfigurasi dari file .env
+# Load konfigurasi dari file .env dengan cara yang aman
 if [ -f .env ]; then
-    export $(grep -v '^#' .env | xargs)
+    set -a
+    source .env
+    set +a
 else
     echo "Error: File .env tidak ditemukan!"
     exit 1
@@ -30,3 +32,5 @@ check_servers() {
 
 # Jalankan pengecekan
 check_servers
+
+#cek perubahan
